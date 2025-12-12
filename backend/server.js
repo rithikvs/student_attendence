@@ -25,7 +25,7 @@ connectDB();
 const corsOptions = {
   origin: [
     'http://localhost:3002',
-    'https://student-attendence.vercel.app',
+    'https://student-attendence-three.vercel.app',
     /\.vercel\.app$/  // Allow all Vercel preview deployments
   ],
   credentials: true,
