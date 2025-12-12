@@ -20,7 +20,19 @@ async function connectDB() {
 }
 
 connectDB();
-app.use(cors());
+
+// CORS configuration to allow Vercel frontend
+const corsOptions = {
+  origin: [
+    'http://localhost:3002',
+    'https://student-attendence.vercel.app',
+    /\.vercel\.app$/  // Allow all Vercel preview deployments
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
