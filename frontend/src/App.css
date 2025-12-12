@@ -5,21 +5,22 @@
 }
 
 :root {
-  --primary-color: #3b82f6;
-  --primary-dark: #2563eb;
+  --primary-color: #2563eb;
+  --primary-dark: #1e40af;
   --secondary-color: #10b981;
-  --danger-color: #ef4444;
+  --danger-color: #dc2626;
   --warning-color: #f59e0b;
-  --dark-bg: #0f172a;
-  --card-bg: #1e293b;
-  --border-color: #475569;
-  --text-primary: #ffffff;
-  --text-secondary: #e2e8f0;
+  --light-bg: #f8fafc;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --hover-bg: #f1f5f9;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: var(--dark-bg);
+  background: var(--light-bg);
   min-height: 100vh;
   overflow-x: hidden;
   color: var(--text-primary);
@@ -35,7 +36,7 @@ body {
   background: var(--card-bg);
   border-bottom: 2px solid var(--primary-color);
   padding: 1rem clamp(1rem, 4vw, 2rem);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -73,13 +74,14 @@ body {
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
   transition: all 0.3s ease;
-  background: var(--dark-bg);
+  background: var(--light-bg);
   border: 2px solid var(--border-color);
 }
 
 .navbar a:hover {
   background: var(--primary-color);
   border-color: var(--primary-color);
+  color: white;
   transform: translateY(-2px);
 }
 
@@ -89,7 +91,7 @@ body {
   gap: 0.75rem;
   color: var(--text-primary);
   font-size: clamp(0.8rem, 2vw, 0.95rem);
-  background: var(--dark-bg);
+  background: var(--light-bg);
   padding: 0.5rem 1rem;
   border-radius: 6px;
   border: 1px solid var(--border-color);
@@ -108,9 +110,9 @@ body {
 }
 
 .navbar .logout-btn:hover {
-  background: #dc2626;
+  background: #b91c1c;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
 }
 
 .container {
@@ -126,14 +128,14 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 1rem;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  background: linear-gradient(135deg, #e0e7ff 0%, #dbeafe 100%);
 }
 
 .auth-box {
   background: var(--card-bg);
   padding: clamp(2rem, 5vw, 3rem);
   border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 450px;
   border: 1px solid var(--border-color);
@@ -167,7 +169,7 @@ body {
   border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: clamp(0.95rem, 2vw, 1.05rem);
-  background: var(--dark-bg);
+  background: var(--card-bg);
   color: var(--text-primary);
   transition: all 0.3s ease;
 }
@@ -177,11 +179,11 @@ body {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .form-group select option {
-  background: var(--dark-bg);
+  background: var(--card-bg);
   color: var(--text-primary);
 }
 
@@ -201,24 +203,24 @@ body {
 .btn-primary:hover {
   background: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
 }
 
 .auth-link {
   text-align: center;
   margin-top: 1.5rem;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .auth-link a {
-  color: #60a5fa;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
 }
 
 .auth-link a:hover {
-  color: #93c5fd;
+  color: var(--primary-dark);
   text-decoration: underline;
 }
 
@@ -227,7 +229,7 @@ body {
   border-radius: 12px;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   margin-bottom: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--border-color);
 }
 
@@ -252,8 +254,9 @@ body {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: 8px;
-  background: var(--dark-bg);
+  background: var(--card-bg);
   margin-bottom: 1.5rem;
+  border: 1px solid var(--border-color);
 }
 
 table {
@@ -292,7 +295,7 @@ tbody tr {
 }
 
 tbody tr:hover {
-  background: var(--dark-bg);
+  background: var(--hover-bg);
 }
 
 .btn {
@@ -304,16 +307,16 @@ tbody tr:hover {
   cursor: pointer;
   transition: all 0.3s ease;
   margin: 0.25rem;
+  color: white;
 }
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .btn-success {
   background: var(--secondary-color);
-  color: white;
 }
 
 .btn-success:hover {
@@ -322,16 +325,14 @@ tbody tr:hover {
 
 .btn-danger {
   background: var(--danger-color);
-  color: white;
 }
 
 .btn-danger:hover {
-  background: #dc2626;
+  background: #b91c1c;
 }
 
 .btn-warning {
   background: var(--warning-color);
-  color: white;
 }
 
 .btn-warning:hover {
@@ -340,7 +341,6 @@ tbody tr:hover {
 
 .btn-info {
   background: #06b6d4;
-  color: white;
 }
 
 .btn-info:hover {
@@ -349,7 +349,6 @@ tbody tr:hover {
 
 .btn-secondary {
   background: #6b7280;
-  color: white;
 }
 
 .btn-secondary:hover {
@@ -369,14 +368,15 @@ tbody tr:hover {
   border-radius: 12px;
   text-align: center;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+  border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
 }
+
 .stat-card h3 {
   color: #ffffff;
   font-size: clamp(0.8rem, 2vw, 0.9rem);
@@ -390,7 +390,6 @@ tbody tr:hover {
   font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 800;
   color: #ffffff;
-} color: white;
 }
 
 .date-selector {
@@ -405,7 +404,7 @@ tbody tr:hover {
   padding: 0.75rem;
   border: 2px solid var(--border-color);
   border-radius: 8px;
-  background: var(--dark-bg);
+  background: var(--card-bg);
   color: var(--text-primary);
   font-size: clamp(0.9rem, 2vw, 1rem);
   flex: 1;
@@ -415,6 +414,7 @@ tbody tr:hover {
 .date-selector input:focus {
   outline: none;
   border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .attendance-status {
@@ -428,7 +428,7 @@ tbody tr:hover {
   padding: 0.6rem;
   border-radius: 6px;
   border: 2px solid var(--border-color);
-  background: var(--dark-bg);
+  background: var(--card-bg);
   color: var(--text-primary);
   font-size: clamp(0.8rem, 2vw, 0.9rem);
   min-width: 100px;
@@ -440,21 +440,21 @@ tbody tr:hover {
   border-radius: 12px;
   margin-bottom: 2rem;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
 .profile-header h2 {
-  color: white;
+  color: #ffffff;
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   margin-bottom: 0.5rem;
   border: none;
   padding: 0;
 }
+
 .profile-header p {
   color: #ffffff;
   font-size: clamp(1rem, 2.5vw, 1.25rem);
   font-weight: 500;
-} font-weight: 500;
 }
 
 .attendance-calendar {
@@ -475,36 +475,51 @@ tbody tr:hover {
 
 .day-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .day-card.present {
-  background: var(--secondary-color);
+  background: #d1fae5;
   border-color: var(--secondary-color);
 }
 
 .day-card.absent {
-  background: var(--danger-color);
+  background: #fee2e2;
   border-color: var(--danger-color);
 }
 
 .day-card.leave {
-  background: var(--warning-color);
+  background: #fef3c7;
   border-color: var(--warning-color);
 }
+
 .day-card .date {
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 700;
   font-size: clamp(0.85rem, 2vw, 1rem);
   margin-bottom: 0.25rem;
 }
 
 .day-card .status {
-  color: #ffffff;
+  color: var(--text-secondary);
   font-size: clamp(0.75rem, 1.8vw, 0.85rem);
   text-transform: capitalize;
   font-weight: 600;
-} font-weight: 600;
+}
+
+.day-card.present .date,
+.day-card.present .status {
+  color: #065f46;
+}
+
+.day-card.absent .date,
+.day-card.absent .status {
+  color: #991b1b;
+}
+
+.day-card.leave .date,
+.day-card.leave .status {
+  color: #92400e;
 }
 
 .loading {
@@ -514,10 +529,11 @@ tbody tr:hover {
   font-size: clamp(1.2rem, 3vw, 1.5rem);
   font-weight: 600;
 }
+
 .error {
-  background: rgba(239, 68, 68, 0.2);
+  background: #fee2e2;
   border-left: 4px solid var(--danger-color);
-  color: #fecaca;
+  color: #991b1b;
   padding: 1rem 1.5rem;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -525,14 +541,13 @@ tbody tr:hover {
 }
 
 .success {
-  background: rgba(16, 185, 129, 0.2);
+  background: #d1fae5;
   border-left: 4px solid var(--secondary-color);
-  color: #a7f3d0;
+  color: #065f46;
   padding: 1rem 1.5rem;
   border-radius: 8px;
   margin-bottom: 1rem;
   font-weight: 600;
-} font-weight: 600;
 }
 
 @media (max-width: 768px) {
@@ -642,12 +657,5 @@ tbody tr:hover {
   .card {
     background: white;
     border: 1px solid #ccc;
-  }
-
-  .card h2,
-  .card h3,
-  td,
-  th {
-    color: black;
   }
 }
