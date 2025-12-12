@@ -156,10 +156,17 @@ function Attendance() {
 
   const handleBulkSubmit = async () => {
     try {
+      console.log('Starting bulk submit...');
       const promises = [];
       
       Object.entries(attendanceMap).forEach(([key, status]) => {
         const [studentId, date] = key.split('_');
+        
+        // Skip future dates
+        if (isFutureDate(date)) {
+          console.log('Skipping future date:', date);
+          return;
+        }
         
         // Find existing record
         const existing = attendance.find(a => {
@@ -170,6 +177,7 @@ function Attendance() {
         
         if (existing) {
           // Update existing record
+          console.log('Updating:', studentId, date, status);
           promises.push(
             axios.put(`${API_URL}/attendence/${existing._id}`, {
               student: studentId,
@@ -179,6 +187,7 @@ function Attendance() {
           );
         } else {
           // Create new record
+          console.log('Creating:', studentId, date, status);
           promises.push(
             axios.post(`${API_URL}/attendence`, {
               student: studentId,
@@ -189,13 +198,16 @@ function Attendance() {
         }
       });
       
+      console.log('Executing', promises.length, 'operations...');
       await Promise.all(promises);
+      console.log('All operations completed successfully');
       setShowModal(false);
       fetchAttendance();
       alert('Attendance saved successfully for all students and dates!');
     } catch (err) {
       console.error('Error saving attendance:', err);
-      alert(err.response?.data?.message || 'Error saving attendance.');
+      console.error('Error details:', err.response?.data);
+      alert(err.response?.data?.message || 'Error saving attendance: ' + err.message);
     }
   };
 

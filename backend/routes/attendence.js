@@ -6,9 +6,11 @@ const router = express.Router();
 // CREATE ATTENDANCE
 router.post("/", async (req, res) => {
   try {
+    console.log('Creating attendance:', req.body);
     const record = await Attendance.create(req.body);
     res.json(record);
   } catch (err) {
+    console.error('Error creating attendance:', err.message);
     res.status(500).json({ message: err.message });
   }
 });
@@ -21,8 +23,14 @@ router.get("/", async (req, res) => {
 
 // UPDATE
 router.put("/:id", async (req, res) => {
-  const updated = await Attendance.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  res.json(updated);
+  try {
+    console.log('Updating attendance:', req.params.id, req.body);
+    const updated = await Attendance.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updated);
+  } catch (err) {
+    console.error('Error updating attendance:', err.message);
+    res.status(500).json({ message: err.message });
+  }
 });
 
 // DELETE
