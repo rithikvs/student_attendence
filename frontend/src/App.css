@@ -423,18 +423,19 @@ body::before {
 .btn-primary {
   width: 100%;
   padding: 1.15rem 2rem;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
   color: white;
   border: none;
   border-radius: 10px;
   font-size: clamp(1rem, 2vw, 1.1rem);
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.5);
+  box-shadow: 0 6px 20px rgba(30, 58, 138, 0.6);
   position: relative;
   overflow: hidden;
   margin-top: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .btn-primary::before {
@@ -453,14 +454,14 @@ body::before {
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.6);
+  box-shadow: 0 10px 35px rgba(30, 58, 138, 0.7);
 }
 
 .btn-primary:active {
   transform: translateY(-1px);
-  box-shadow: 0 5px 15px rgba(15, 23, 42, 0.5);
+  box-shadow: 0 5px 20px rgba(30, 58, 138, 0.6);
 }
 
 .auth-link {
@@ -1113,4 +1114,5 @@ tbody tr:hover {
     background: white;
     border: 1px solid #ccc;
   }
+}
 }
