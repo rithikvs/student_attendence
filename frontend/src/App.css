@@ -14,7 +14,7 @@
   --purple: #a855f7;
   --pink: #ec4899;
   --orange: #f97316;
-  --light-bg: linear-gradient(135deg, #4565f3 0%, #63bded 100%);
+  --light-bg: linear-gradient(135deg, #a5c7f5 0%, #4fbdf4 100%);
   --card-bg: #ffffff;
   --border-color: #e0e7ff;
   --text-primary: #1e293b;
@@ -30,7 +30,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--light-bg);
   background-attachment: fixed;
   min-height: 100vh;
   overflow-x: hidden;
@@ -195,7 +195,7 @@ body::before {
   align-items: center;
   min-height: 100vh;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--light-bg);
   position: relative;
   overflow: hidden;
 }

@@ -80,7 +80,7 @@ function Register() {
               <option value="student">Student</option>
             </select>
           </div>
-          <button type="submit" className="btn">Register</button>
+          <button type="submit" className="btn btn-primary">Register</button>
         </form>
         <div className="auth-switch">
           Already have an account? <Link to="/login">Login</Link>
