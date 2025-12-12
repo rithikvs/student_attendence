@@ -1152,6 +1152,18 @@ tbody tr:hover {
   filter: drop-shadow(0 2px 8px rgba(102, 126, 234, 0.2));
 }
 
+.modal h3 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  filter: drop-shadow(0 2px 8px rgba(102, 126, 234, 0.2));
+}
+
 .modal-buttons {
   display: flex;
   gap: 1rem;

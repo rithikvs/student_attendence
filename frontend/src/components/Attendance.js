@@ -55,6 +55,10 @@ function Attendance() {
   };
 
   const handleGenerateDates = async () => {
+    console.log('Generate button clicked');
+    console.log('Start Date:', startDate);
+    console.log('End Date:', endDate);
+    
     if (!startDate || !endDate) {
       alert('Please select both start and end dates');
       return;
@@ -75,35 +79,46 @@ function Attendance() {
       return;
     }
     
-    // Refresh students list to include newly added students
-    const studentsResponse = await axios.get(`${API_URL}/student`);
-    const currentStudents = studentsResponse.data;
-    setStudents(currentStudents);
-    
-    const dates = generateDateRange(startDate, endDate);
-    setDateRange(dates);
-    
-    // Initialize attendance map for all students and all dates
-    const initialMap = {};
-    currentStudents.forEach(student => {
-      dates.forEach(date => {
-        const key = `${student._id}_${date}`;
-        // Check if attendance already exists
-        const existing = attendance.find(a => {
-          const studentId = typeof a.student === 'object' ? a.student._id : a.student;
-          const recordDate = new Date(a.date).toISOString().split('T')[0];
-          return studentId === student._id && recordDate === date;
+    try {
+      console.log('Fetching students...');
+      // Refresh students list to include newly added students
+      const studentsResponse = await axios.get(`${API_URL}/student`);
+      const currentStudents = studentsResponse.data;
+      console.log('Students fetched:', currentStudents.length);
+      setStudents(currentStudents);
+      
+      console.log('Generating date range...');
+      const dates = generateDateRange(startDate, endDate);
+      console.log('Dates generated:', dates.length, dates);
+      setDateRange(dates);
+      
+      // Initialize attendance map for all students and all dates
+      const initialMap = {};
+      currentStudents.forEach(student => {
+        dates.forEach(date => {
+          const key = `${student._id}_${date}`;
+          // Check if attendance already exists
+          const existing = attendance.find(a => {
+            const studentId = typeof a.student === 'object' ? a.student._id : a.student;
+            const recordDate = new Date(a.date).toISOString().split('T')[0];
+            return studentId === student._id && recordDate === date;
+          });
+          // Set Sunday as leave by default, otherwise use existing or present
+          if (isSunday(date)) {
+            initialMap[key] = existing ? existing.status : 'leave';
+          } else {
+            initialMap[key] = existing ? existing.status : 'present';
+          }
         });
-        // Set Sunday as leave by default, otherwise use existing or present
-        if (isSunday(date)) {
-          initialMap[key] = existing ? existing.status : 'leave';
-        } else {
-          initialMap[key] = existing ? existing.status : 'present';
-        }
       });
-    });
-    setAttendanceMap(initialMap);
-    setShowModal(true);
+      console.log('Attendance map initialized:', Object.keys(initialMap).length, 'entries');
+      setAttendanceMap(initialMap);
+      setShowModal(true);
+      console.log('Modal should be visible now');
+    } catch (error) {
+      console.error('Error in handleGenerateDates:', error);
+      alert('Error generating attendance sheet: ' + error.message);
+    }
   };
 
   const handleStatusChange = (studentId, date, status) => {
