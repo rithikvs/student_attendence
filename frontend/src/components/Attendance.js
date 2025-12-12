@@ -238,7 +238,7 @@ function Attendance() {
                 </tr>
               </thead>
               <tbody>
-                {students.map((student) => {
+                {students.filter(s => s && s._id).map((student) => {
                   const stats = calculateStudentStats(student._id);
                   return (
                     <tr key={student._id}>
@@ -268,7 +268,7 @@ function Attendance() {
                             {isTeacher ? (
                               <select
                                 value={record.status}
-                                onChange={(e) => updateAttendance(student._id, date, e.target.value, record._id)}
+                                onChange={(e) => updateAttendance(student._id, date, e.target.value, record._id || null)}
                                 disabled={isDisabled}
                                 style={{ 
                                   padding: '0.3rem', 
