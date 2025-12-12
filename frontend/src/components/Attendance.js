@@ -39,13 +39,22 @@ function Attendance() {
 
   const generateDateRange = (start, end) => {
     const dates = [];
-    const currentDate = new Date(start);
-    const endDate = new Date(end);
+    const currentDate = new Date(start + 'T00:00:00'); // Add time to ensure proper parsing
+    const endDate = new Date(end + 'T00:00:00');
+    
+    // Ensure dates are valid
+    if (isNaN(currentDate.getTime()) || isNaN(endDate.getTime())) {
+      console.error('Invalid date format:', start, end);
+      return dates;
+    }
     
     while (currentDate <= endDate) {
-      dates.push(new Date(currentDate).toISOString().split('T')[0]);
+      const dateString = currentDate.toISOString().split('T')[0];
+      dates.push(dateString);
       currentDate.setDate(currentDate.getDate() + 1);
     }
+    
+    console.log('Date range generated from', start, 'to', end, ':', dates);
     return dates;
   };
 
@@ -83,9 +92,14 @@ function Attendance() {
       console.log('Fetching students...');
       // Refresh students list to include newly added students
       const studentsResponse = await axios.get(`${API_URL}/student`);
-      const currentStudents = studentsResponse.data;
+      const currentStudents = studentsResponse.data.filter(s => s && s._id); // Filter out null/invalid students
       console.log('Students fetched:', currentStudents.length);
       setStudents(currentStudents);
+      
+      if (currentStudents.length === 0) {
+        alert('No students found. Please add students first.');
+        return;
+      }
       
       console.log('Generating date range...');
       const dates = generateDateRange(startDate, endDate);
@@ -95,10 +109,13 @@ function Attendance() {
       // Initialize attendance map for all students and all dates
       const initialMap = {};
       currentStudents.forEach(student => {
+        if (!student || !student._id) return; // Skip invalid students
+        
         dates.forEach(date => {
           const key = `${student._id}_${date}`;
           // Check if attendance already exists
           const existing = attendance.find(a => {
+            if (!a || !a.student) return false;
             const studentId = typeof a.student === 'object' ? a.student._id : a.student;
             const recordDate = new Date(a.date).toISOString().split('T')[0];
             return studentId === student._id && recordDate === date;
