@@ -317,7 +317,10 @@ body::before {
   font-size: clamp(2rem, 5vw, 2.6rem);
   font-weight: 900;
   letter-spacing: -0.5px;
-  filter: drop-shadow(0 2px 8px rgba(102, 126, 234, 0.3));\n}\n\n.auth-box p.subtitle {
+  filter: drop-shadow(0 2px 8px rgba(102, 126, 234, 0.3));
+}
+
+.auth-box p.subtitle {
   text-align: center;
   color: #475569;
   margin-bottom: 2rem;
@@ -1056,5 +1059,4 @@ tbody tr:hover {
     background: white;
     border: 1px solid #ccc;
   }
-}
 }
