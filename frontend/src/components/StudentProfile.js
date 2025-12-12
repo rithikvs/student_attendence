@@ -175,7 +175,7 @@ function StudentProfile() {
               <p><strong>Roll No:</strong> {profile.rollNo}</p>
               <p><strong>Class:</strong> {profile.class}</p>
               <p><strong>Section:</strong> {profile.section || '-'}</p>
-              <button className="btn-edit" onClick={() => setShowEditModal(true)} style={{ marginTop: '1rem' }}>
+              <button className="btn btn-success" onClick={() => setShowEditModal(true)} style={{ marginTop: '1rem' }}>
                 Edit Profile
               </button>
             </div>
