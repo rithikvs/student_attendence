@@ -23,7 +23,7 @@ function Register() {
     setSuccess('');
     
     try {
-      const response = await axios.post('/auth/register', formData);
+      const response = await axios.post(`${API_URL}/auth/register`, formData);
       setSuccess('Registration successful! Redirecting...');
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -31,7 +31,8 @@ function Register() {
         window.location.href = response.data.user.role === 'student' ? '/my-profile' : '/students';
       }, 1500);
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      console.error('Register error:', err);
+      setError(err.response?.data?.message || err.message || 'Registration failed');
     }
   };
 

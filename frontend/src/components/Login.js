@@ -19,14 +19,15 @@ function Login() {
     setError('');
     
     try {
-      const response = await axios.post('/auth/login', formData);
+      const response = await axios.post(`${API_URL}/auth/login`, formData);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       
       // Force re-render by reloading
       window.location.href = response.data.user.role === 'student' ? '/my-profile' : '/students';
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      console.error('Login error:', err);
+      setError(err.response?.data?.message || err.message || 'Login failed');
     }
   };
 
