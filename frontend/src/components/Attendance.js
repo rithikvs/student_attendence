@@ -59,8 +59,15 @@ function Attendance() {
   };
 
   const isSunday = (dateString) => {
-    const date = new Date(dateString);
+    const date = new Date(dateString + 'T00:00:00');
     return date.getDay() === 0; // 0 = Sunday
+  };
+
+  const isFutureDate = (dateString) => {
+    const date = new Date(dateString + 'T00:00:00');
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date > today;
   };
 
   const handleGenerateDates = async () => {
@@ -73,13 +80,14 @@ function Attendance() {
       return;
     }
     
-    const start = new Date(startDate);
-    const end = new Date(endDate);
+    const start = new Date(startDate + 'T00:00:00');
+    const end = new Date(endDate + 'T00:00:00');
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
-    if (end > today) {
-      alert('End date cannot be in the future!');
+    // Allow end date to be in future (for full month), but limit actual attendance to today
+    if (start > today) {
+      alert('Start date cannot be in the future!');
       return;
     }
     
@@ -269,6 +277,9 @@ function Attendance() {
         {isTeacher && (
           <div style={{ background: '#f8f9fa', padding: '1.5rem', borderRadius: '10px', marginBottom: '1.5rem' }}>
             <h3 style={{ color: '#667eea', marginBottom: '1rem' }}>Mark Attendance for Date Range</h3>
+            <p style={{ color: '#64748b', fontSize: '0.9rem', marginBottom: '1rem' }}>
+              Select full month dates. You can only mark attendance up to today's date.
+            </p>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-end', flexWrap: 'wrap' }}>
               <div className="form-group" style={{ marginBottom: 0, flex: 1, minWidth: '200px' }}>
                 <label>Start Date</label>
@@ -280,12 +291,11 @@ function Attendance() {
                 />
               </div>
               <div className="form-group" style={{ marginBottom: 0, flex: 1, minWidth: '200px' }}>
-                <label>End Date</label>
+                <label>End Date (can be future for full month)</label>
                 <input
                   type="date"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
-                  max={new Date().toISOString().split('T')[0]}
                 />
               </div>
               <button className="btn-add" onClick={handleGenerateDates} style={{ marginBottom: 0 }}>
@@ -480,9 +490,15 @@ function Attendance() {
                   <tr>
                     <th style={{ textAlign: 'left', padding: '0.5rem', minWidth: '150px' }}>Student</th>
                     {dateRange.map(date => (
-                      <th key={date} style={{ textAlign: 'center', padding: '0.5rem', minWidth: '100px' }}>
-                        {new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      <th key={date} style={{ 
+                        textAlign: 'center', 
+                        padding: '0.5rem', 
+                        minWidth: '100px',
+                        background: isFutureDate(date) ? '#f3f4f6' : 'inherit'
+                      }}>
+                        {new Date(date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                         {isSunday(date) && <div style={{ fontSize: '0.75rem', color: '#f59e0b' }}>Sun</div>}
+                        {isFutureDate(date) && <div style={{ fontSize: '0.75rem', color: '#9ca3af' }}>Future</div>}
                       </th>
                     ))}
                   </tr>
@@ -496,17 +512,25 @@ function Attendance() {
                       </td>
                       {dateRange.map(date => {
                         const key = `${student._id}_${date}`;
+                        const isDisabled = isFutureDate(date);
                         return (
-                          <td key={date} style={{ textAlign: 'center', padding: '0.5rem' }}>
+                          <td key={date} style={{ 
+                            textAlign: 'center', 
+                            padding: '0.5rem',
+                            background: isDisabled ? '#f3f4f6' : 'inherit'
+                          }}>
                             <select
                               value={attendanceMap[key] || 'present'}
                               onChange={(e) => handleStatusChange(student._id, date, e.target.value)}
+                              disabled={isDisabled}
                               style={{ 
                                 padding: '0.3rem', 
                                 borderRadius: '5px', 
                                 border: '1px solid #ddd',
                                 fontSize: '0.9rem',
-                                cursor: 'pointer'
+                                cursor: isDisabled ? 'not-allowed' : 'pointer',
+                                background: isDisabled ? '#e5e7eb' : 'white',
+                                color: isDisabled ? '#9ca3af' : 'inherit'
                               }}
                             >
                               <option value="present">P</option>
