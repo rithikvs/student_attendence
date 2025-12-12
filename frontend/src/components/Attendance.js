@@ -159,25 +159,25 @@ function Attendance() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this attendance record?')) {
-      try {
-        await axios.delete(`${API_URL}/attendence/${id}`);
-        fetchAttendance();
-      } catch (err) {
-        console.error('Error deleting attendance:', err);
-      }
-    }
-  };
+  // const handleDelete = async (id) => {
+  //   if (window.confirm('Are you sure you want to delete this attendance record?')) {
+  //     try {
+  //       await axios.delete(`${API_URL}/attendence/${id}`);
+  //       fetchAttendance();
+  //     } catch (err) {
+  //       console.error('Error deleting attendance:', err);
+  //     }
+  //   }
+  // };
 
-  const getStudentName = (studentId) => {
-    if (!studentId) return 'Deleted Student';
-    if (typeof studentId === 'object' && studentId !== null) {
-      return studentId.name || 'Unknown';
-    }
-    const student = students.find(s => s._id === studentId);
-    return student?.name || 'Deleted Student';
-  };
+  // const getStudentName = (studentId) => {
+  //   if (!studentId) return 'Deleted Student';
+  //   if (typeof studentId === 'object' && studentId !== null) {
+  //     return studentId.name || 'Unknown';
+  //   }
+  //   const student = students.find(s => s._id === studentId);
+  //   return student?.name || 'Deleted Student';
+  // };
 
   // Group attendance by date
   const groupAttendanceByDate = () => {
@@ -208,10 +208,8 @@ function Attendance() {
     });
     const totalDays = allDates.size;
     
-    // Count present, absent, and leave
+    // Count present
     const present = studentRecords.filter(r => r.status === 'present').length;
-    const absent = studentRecords.filter(r => r.status === 'absent').length;
-    const leave = studentRecords.filter(r => r.status === 'leave').length;
     
     // For newly added students or students with missing records:
     // Missing days are counted as "present" by default
