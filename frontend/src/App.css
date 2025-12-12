@@ -269,6 +269,10 @@ body::before {
   border-radius: 20px 20px 0 0;
 }
 
+.auth-box.no-top-border::before {
+  display: none;
+}
+
 .auth-box h2 {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;

@@ -33,7 +33,7 @@ function Login() {
 
   return (
     <div className="auth-container">
-      <div className="auth-box">
+      <div className="auth-box no-top-border">
         <h2>Login</h2>
         {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
